@@ -1,23 +1,32 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
+import filmRouter from './routes/film'
+import cineamaRouter from './routes/cinema'
+import centerRouter from './routes/center'
+import VuexCmp from "@/views/Vuex";
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch((err) => err);
+};
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+ 
+
+
+{
+  path:'/',
+  redirect:'/films/nowplaying'
+},
+{
+  path: "/vuex",
+  component: VuexCmp,
+},
+...filmRouter,
+cineamaRouter,
+centerRouter,
 ]
 
 const router = new VueRouter({

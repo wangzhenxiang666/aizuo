@@ -1,32 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Footer v-show="isShow"></Footer>
     <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import Footer from '@/components/Navigation/Footer'
+// import uri from '@/config/uri'
+export default {
+  data(){
+    return {
+      // isShow:true,
     }
-  }
+  },
+  components: { Footer },
+   created() {
+    //  this.$http.get(uri.getCities).then(ret=>console.log(ret))
+    // this.$eventBus.$on('show_jiojio',(flag)=>{
+    //   this.isShow = flag;
+    // })
+    },
+    computed:{
+      
+        isShow() {
+            return this.$store.state.global.isShowFooter;
+        },
+      
+    }
 }
+</script>
+<style lang="scss">
+
 </style>
